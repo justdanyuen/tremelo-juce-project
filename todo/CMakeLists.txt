@@ -55,26 +55,26 @@ cpmaddpackage(
 include(cmake/CompilerWarnings.cmake)
 include(cmake/Util.cmake)
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if(CMAKE_SYSTEM_NAME STREQUAL "MacOS")
   # Sets the Windows VST3 installation location to one
   # that doesn't require elevated permissions
-  set_directory_properties(PROPERTIES JUCE_VST3_COPY_DIR "$ENV{LOCALAPPDATA}/Programs/Common/VST3")
+  set_directory_properties(PROPERTIES JUCE_VST3_COPY_DIR "~/Library/Audio/Plug-Ins/VST3")
 endif()
 
 # Adds a plugin target.
 set(TREMOLO_PLUGIN_NAME "TODO: set your plugin name")
 juce_add_plugin(
-  TremoloCoursePlugin
+  Tremologger
   PRODUCT_NAME
-    ${TREMOLO_PLUGIN_NAME}
+    ${Tremologger}
   VERSION
-    # TODO: add version
+    0.0.1
   COMPANY_NAME
-    # TODO: add company
+    "Datamaster Plugins"
   PLUGIN_MANUFACTURER_CODE
-    # TODO: add plugin manufacturer code
+    Dmpn
   PLUGIN_CODE
-    # TODO: add plugin code
+    Hank
   FORMATS
     Standalone
     AU
@@ -88,11 +88,11 @@ juce_add_plugin(
   VST3_AUTO_MANIFEST
     FALSE
   COPY_PLUGIN_AFTER_BUILD
-    FALSE
+    TRUE
 )
 
 # Configures the JUCE sources included in the plugin target.
-target_compile_definitions(TremoloCoursePlugin
+target_compile_definitions(Tremologger
   PRIVATE
     JUCE_WEB_BROWSER=0
     JUCE_USE_CURL=0
@@ -126,7 +126,7 @@ target_compile_options(tremolo_plugin INTERFACE "${PROJECT_WARNINGS_CXX}")
 target_link_libraries(tremolo_plugin INTERFACE tremolo::tremolo_plugin_assets)
 
 target_link_libraries(
-  TremoloCoursePlugin
+  Tremologger
   PRIVATE
     tremolo::tremolo_plugin
   PUBLIC

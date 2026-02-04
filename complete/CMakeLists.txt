@@ -55,14 +55,14 @@ cpmaddpackage(
 include(cmake/CompilerWarnings.cmake)
 include(cmake/Util.cmake)
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if(CMAKE_SYSTEM_NAME STREQUAL "MacOS")
   # Sets the Windows VST3 installation location to one
   # that doesn't require elevated permissions
-  set_directory_properties(PROPERTIES JUCE_VST3_COPY_DIR "$ENV{LOCALAPPDATA}/Programs/Common/VST3")
+  set_directory_properties(PROPERTIES JUCE_VST3_COPY_DIR "~/Library/Audio/Plug-Ins/VST3")
 endif()
 
 # Adds a plugin target.
-set(TREMOLO_PLUGIN_NAME "Tremolo")
+set(TREMOLO_PLUGIN_NAME "Tremolo_Plugin")
 juce_add_plugin(
   TremoloCoursePlugin
   PRODUCT_NAME
@@ -88,7 +88,7 @@ juce_add_plugin(
   VST3_AUTO_MANIFEST
     FALSE
   COPY_PLUGIN_AFTER_BUILD
-    FALSE
+    TRUE
 )
 
 # Configures the JUCE sources included in the plugin target.
